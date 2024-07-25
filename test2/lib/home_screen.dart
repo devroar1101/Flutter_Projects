@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreenWidgets extends StatelessWidget {
   const HomeScreenWidgets(this.navigateScreen, {super.key});
@@ -20,9 +21,9 @@ class HomeScreenWidgets extends StatelessWidget {
             width: 20,
             height: 20,
           ),
-          const Text(
+          Text(
             'Learn flutter by fun way!!',
-            style: TextStyle(color: Colors.white, fontSize: 40),
+            style: GoogleFonts.lato(color: Colors.white, fontSize: 20),
           ),
           const SizedBox(
             width: 20,
