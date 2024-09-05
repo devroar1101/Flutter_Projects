@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "709745592663",
+    "firebase_url": "https://noku-list-default-rtdb.firebaseio.com",
+    "project_id": "noku-list",
+    "storage_bucket": "noku-list.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709745592663:android:9f6391b53d22fc685cd612",
+        "android_client_info": {
+          "package_name": "com.example.nokku"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6NMIJUqhk1IE1XxvwJbx4Fzm87Re0fQQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709745592663:android:c756b3a58c86ca6e5cd612",
+        "android_client_info": {
+          "package_name": "com.example.noku"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6NMIJUqhk1IE1XxvwJbx4Fzm87Re0fQQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

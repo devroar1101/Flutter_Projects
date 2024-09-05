@@ -61,11 +61,18 @@ class Mealcategoryhome extends ConsumerWidget {
               end: Alignment.bottomLeft,
             ),
           ),
-          child: Text(
-            categories[index].title,
-            style: const TextStyle(
-              color: Colors.white,
-            ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                categories[index].title,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              const Spacer(),
+              IconButton(onPressed: () {}, icon: const Icon(Icons.favorite))
+            ],
           ),
         ),
       ),

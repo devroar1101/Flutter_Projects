@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "985694138807",
+    "project_id": "chat-app-flutter-learn",
+    "storage_bucket": "chat-app-flutter-learn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:985694138807:android:8aaa3570461931f5353832",
+        "android_client_info": {
+          "package_name": "com.example.chatap"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9GLh3m8D0hMxMbXktoTyYa5n7bbJI6nQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
