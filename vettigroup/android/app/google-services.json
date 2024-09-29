@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "292663948122",
+    "project_id": "vettigroup-family",
+    "storage_bucket": "vettigroup-family.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292663948122:android:fae8e2709c20dcffc23963",
+        "android_client_info": {
+          "package_name": "com.example.vettigroup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAilkoS4S1458Rt1oqCE5Ke8ztlquG1GL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
