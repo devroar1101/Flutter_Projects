@@ -8,10 +8,13 @@ enum PostType { text, video, image }
 class Post {
   final String id;
   final String userId;
-  final Timestamp createdAt;
-  final PostType type;
-  final String mediaUrl;
-  final String content;
+  Timestamp createdAt;
+  String type;
+  String mediaUrl;
+  String content;
+  List<String> taggedUsers;
+  String contentcolor;
+  String contentfontcolor;
 
   Post(
       {String? id,
@@ -19,28 +22,40 @@ class Post {
       required this.userId,
       required this.type,
       required this.mediaUrl,
-      required this.content})
-      : id = id ?? uuid.v4();
+      required this.content,
+      required this.contentcolor,
+      required this.contentfontcolor,
+      List<String>? taggedUsers})
+      : id = id ?? uuid.v4(),
+        taggedUsers = taggedUsers ?? [];
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'createdAt': createdAt,
       'userId': userId,
-      'type': type.name,
+      'type': type,
       'mediaUrl': mediaUrl,
       'content': content,
+      'taggedUsers': taggedUsers,
+      'contentcolor': contentcolor,
+      'contentfontcolor': contentfontcolor,
     };
   }
 
   factory Post.fromMap(Map<String, dynamic> map) {
     return Post(
         id: map['id'],
-        createdAt: map[' createdAt'],
-        userId: map[' userId'],
-        type: map[' type'],
-        mediaUrl: map[' mediaUrl'],
-        content: map[' content']);
+        createdAt: map['createdAt'],
+        userId: map['userId'],
+        type: map['type'],
+        mediaUrl: map['mediaUrl'],
+        content: map['content'],
+        taggedUsers: (map['taggedUsers'] as List<dynamic>)
+            .map((m) => m as String)
+            .toList(),
+        contentcolor: map['contentcolor'],
+        contentfontcolor: map['contentfontcolor']);
   }
 }
 
@@ -80,5 +95,31 @@ class FireStorePostRepository {
           ),
         )
         .toList();
+  }
+
+  Future<List<Post>> getPostsByUserId(userid) async {
+    final snapshot = await firestore
+        .collection('posts')
+        .where('userId', isEqualTo: userid)
+        .get();
+
+    return snapshot.docs
+        .map(
+          (m) => Post.fromMap(
+            m.data(),
+          ),
+        )
+        .toList();
+  }
+
+  Stream<List<Post>> getNewsFeed(List<String> userIds) {
+    return firestore
+        .collection('posts')
+        .where('userId', whereIn: userIds)
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs.map((m) => Post.fromMap(m.data())).toList();
+    });
   }
 }

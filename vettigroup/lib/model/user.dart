@@ -85,4 +85,14 @@ class FireStoreUserRepositorty {
 
     return snapShot.docs.map((m) => AppUser.fromMap(m.data())).toList();
   }
+
+  Future<List<AppUser>> getUsersFromIds(List<String> ids) async {
+    List<AppUser> users = [];
+
+    for (String id in ids) {
+      final user = await getUserById(id);
+      users.add(user!);
+    }
+    return users;
+  }
 }

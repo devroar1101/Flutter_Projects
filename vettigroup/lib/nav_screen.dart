@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:vettigroup/chat/chat_room.dart';
 
-import 'package:vettigroup/profile/profile_screen.dart';
 import 'package:vettigroup/newsfeeds/screens.dart';
 
 import 'package:vettigroup/widgets/nav_bar.dart';
@@ -28,14 +27,12 @@ class _NavScreenState extends State<NavScreen> {
         userId: currentUserId,
       ),
       const ChatRoom(),
-      ProfileScreen(userId: currentUserId),
     ];
   }
 
   final List<IconData> _icons = [
     Icons.home,
     Icons.chat_bubble_outline,
-    Icons.person_outline
   ];
   int _selectedScreen = 0;
   @override

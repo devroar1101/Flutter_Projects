@@ -19,21 +19,10 @@ final singleUserSnapshot =
   return repo.getUserById(userId);
 });
 
-// final connectionSnapshot =
-//     FutureProvider.family<List<UserIndex>, String>((ref, userId) {
-//   final repo = ref.watch(connectionProvider);
-
-//   return repo.getAllConnection(userId);
-// });
-
-// final userConnectionProvider = Provider.family<List<UserIndex>, String>(
-//   (ref, userId) {
-//     final repo = ref.watch(connectionSnapshot(userId));
-
-//     return repo.maybeWhen(
-//         data: (userIndexList) {
-//           return userIndexList;
-//         },
-//         orElse: () => []);
-//   },
-// );
+final userListFromIdsProvider =
+    FutureProvider.family<List<AppUser>, List<String>>(
+  (ref, arg) {
+    final repo = ref.watch(userRepoProvider);
+    return repo.getUsersFromIds(arg);
+  },
+);

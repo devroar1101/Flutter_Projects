@@ -10,7 +10,7 @@ import 'package:vettigroup/model/user.dart';
 import 'package:vettigroup/provider/user_provider.dart';
 import 'package:vettigroup/utility/utility_methods.dart';
 import 'package:vettigroup/widgets/loader.dart';
-import 'package:vettigroup/widgets/photo_picker.dart';
+import 'package:vettigroup/newsfeeds/widgets/photo_picker.dart';
 
 // ignore: must_be_immutable
 class UpdateProfile extends ConsumerStatefulWidget {
@@ -75,7 +75,7 @@ class _UpdateProfileState extends ConsumerState<UpdateProfile> {
         imageUrl = await storageRef.getDownloadURL();
       }
 
-      AppUser user = AppUser(
+      user = AppUser(
           username: username,
           email: email,
           userId: widget.user.userId,
@@ -87,7 +87,7 @@ class _UpdateProfileState extends ConsumerState<UpdateProfile> {
           connections: widget.user.connections);
 
       try {
-        ref.watch(userRepoProvider).updateUser(user);
+        ref.watch(userRepoProvider).updateUser(user!);
         ref.invalidate(singleUserSnapshot(widget.user.userId));
         // ignore: use_build_context_synchronously
         Navigator.pop(context);

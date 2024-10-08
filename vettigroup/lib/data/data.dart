@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
-import 'package:vettigroup/model/post.dart';
 import 'package:vettigroup/model/story.dart';
 import 'package:vettigroup/model/user.dart';
 
@@ -161,89 +160,52 @@ final List<Story> stories = [
   ),
 ];
 
-List<Post> mockPosts = [
-  Post(
-    userId: 'user123',
-    createdAt: Timestamp.now(),
-    type: PostType.text,
-    mediaUrl: '',
-    content: 'This is my first text post!',
-  ),
-  Post(
-    userId: 'user123',
-    createdAt: Timestamp.now(),
-    type: PostType.image,
-    mediaUrl: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29',
-    content: 'A beautiful sunset view!',
-  ),
-  Post(
-    userId: 'user124',
-    createdAt: Timestamp.now(),
-    type: PostType.video,
-    mediaUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-    content: 'Watch this cool video!',
-  ),
-  Post(
-    userId: 'user124',
-    createdAt: Timestamp.now(),
-    type: PostType.image,
-    mediaUrl: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
-    content: 'Delicious cup of coffee.',
-  ),
-  Post(
-    userId: 'user125',
-    createdAt: Timestamp.now(),
-    type: PostType.image,
-    mediaUrl: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
-    content: 'Nature at its best!',
-  ),
-  Post(
-    userId: 'user126',
-    createdAt: Timestamp.now(),
-    type: PostType.text,
-    mediaUrl: '',
-    content: 'Good morning, everyone!',
-  ),
-  Post(
-    userId: 'user124',
-    createdAt: Timestamp.now(),
-    type: PostType.video,
-    mediaUrl: 'https://www.w3schools.com/html/movie.mp4',
-    content: 'Check out this amazing short film!',
-  ),
-  Post(
-    userId: 'user123',
-    createdAt: Timestamp.now(),
-    type: PostType.image,
-    mediaUrl: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-    content: 'Look at this amazing waterfall!',
-  ),
-  Post(
-    userId: 'user125',
-    createdAt: Timestamp.now(),
-    type: PostType.image,
-    mediaUrl: 'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0',
-    content: 'My latest mountain adventure.',
-  ),
-  Post(
-    userId: 'user127',
-    createdAt: Timestamp.now(),
-    type: PostType.text,
-    mediaUrl: '',
-    content: 'Excited to share more soon!',
-  ),
-  Post(
-    userId: 'user123',
-    createdAt: Timestamp.now(),
-    type: PostType.video,
-    mediaUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-    content: 'A quick behind-the-scenes video.',
-  ),
-  Post(
-    userId: 'user127',
-    createdAt: Timestamp.now(),
-    type: PostType.image,
-    mediaUrl: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa',
-    content: 'The city lights are mesmerizing.',
-  ),
+// List of background colors represented as hexadecimal strings
+List<String> colors = [
+  '0xffffffff', // Colors.white
+  '0xfff44336', // Colors.red
+  '0xffe91e63', // Colors.pink
+  '0xff9c27b0', // Colors.purple
+  '0xff673ab7', // Colors.deepPurple
+  '0xff3f51b5', // Colors.indigo
+  '0xff2196f3', // Colors.blue
+  '0xff03a9f4', // Colors.lightBlue
+  '0xff00bcd4', // Colors.cyan
+  '0xff009688', // Colors.teal
+  '0xff4caf50', // Colors.green
+  '0xff8bc34a', // Colors.lightGreen
+  '0xffcddc39', // Colors.lime
+  '0xffffeb3b', // Colors.yellow
+  '0xffffc107', // Colors.amber
+  '0xffff9800', // Colors.orange
+  '0xffff5722', // Colors.deepOrange
+  '0xff795548', // Colors.brown
+  '0xff9e9e9e', // Colors.grey
+  '0xff607d8b', // Colors.blueGrey
+  '0xff000000', // Colors.black
+];
+
+// List of font colors represented as hexadecimal strings
+final List<String> fontColors = [
+  '0xffffffff', // Colors.white
+  '0xff000000', // Colors.black
+  '0xfff44336', // Colors.red
+  '0xff4caf50', // Colors.green
+  '0xff2196f3', // Colors.blue
+  '0xffffeb3b', // Colors.yellow
+  '0xffff9800', // Colors.orange
+  '0xff9c27b0', // Colors.purple
+  '0xffe91e63', // Colors.pink
+  '0xff795548', // Colors.brown
+  '0xff9e9e9e', // Colors.grey
+  '0xff009688', // Colors.teal
+  '0xff00bcd4', // Colors.cyan
+  '0xff3f51b5', // Colors.indigo
+  '0xffcddc39', // Colors.lime
+  '0xffffc107', // Colors.amber
+  '0xffff5722', // Colors.deepOrange
+  '0xff673ab7', // Colors.deepPurple
+  '0xff03a9f4', // Colors.lightBlue
+  '0xff8bc34a', // Colors.lightGreen
+  '0xff607d8b', // Colors.blueGrey
 ];
