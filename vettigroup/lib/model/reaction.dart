@@ -5,9 +5,9 @@ const uuid = Uuid();
 
 class Reaction {
   final String id;
-  final String userid;
-  final int reactIndex;
-  final Timestamp createdAt;
+  final String userId;
+  int reactIndex;
+  Timestamp createdAt;
   final String postId;
 
   Reaction(
@@ -15,7 +15,7 @@ class Reaction {
       required this.reactIndex,
       required this.createdAt,
       required this.postId,
-      required this.userid})
+      required this.userId})
       : id = id ?? uuid.v4();
 
   Map<String, dynamic> toMap() {
@@ -24,7 +24,7 @@ class Reaction {
       'reactIndex': reactIndex,
       'createdAt': createdAt,
       'postId': postId,
-      'userid': userid,
+      'userId': userId,
     };
   }
 
@@ -34,7 +34,7 @@ class Reaction {
         reactIndex: map['reactIndex'],
         createdAt: map['createdAt'],
         postId: map['postId'],
-        userid: map['userid']);
+        userId: map['userId']);
   }
 }
 
@@ -52,7 +52,7 @@ class FireStoreReactionRepository {
 
   void updateReaction(Reaction reaction) async {
     await firestore
-        .collection('Reactions')
+        .collection('reactions')
         .doc(reaction.id)
         .update(reaction.toMap());
   }
@@ -87,10 +87,10 @@ class FireStoreReactionRepository {
     final snapshot = await firestore
         .collection('reactions')
         .where('postId', isEqualTo: postId)
-        .get(); // Use get() instead of snapshots() for one-time fetch
+        .get();
 
-    return snapshot.docs
-        .map((doc) => Reaction.fromMap(doc.data()))
-        .toList(); // Convert documents to Reaction objects
+    // Use get() instead of snapshots() for one-time fetch
+
+    return snapshot.docs.map((doc) => Reaction.fromMap(doc.data())).toList();
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vettigroup/model/post.dart';
 import 'package:vettigroup/post/content_with_color.dart';
 import 'package:vettigroup/post/content_with_image.dart';
+import 'package:vettigroup/post/content_with_split.dart';
 import 'package:vettigroup/post/content_with_video.dart';
 import 'package:vettigroup/post/create_post_content.dart';
 import 'package:vettigroup/post/create_post_header.dart';
@@ -26,6 +27,8 @@ class CreatePost extends StatefulWidget {
 class _CreatePostState extends State<CreatePost> {
   String postType = 'None';
   final TextEditingController contentController = TextEditingController();
+  final TextEditingController amountController = TextEditingController();
+
   File? selectedFile;
   List<String> taggedUsers = [];
   bool post = false;
@@ -33,11 +36,12 @@ class _CreatePostState extends State<CreatePost> {
   String contentFontColor = '';
   String? networkMedia;
   String? postId;
+  DateTime? splitDate;
 
   @override
   void initState() {
     super.initState();
-
+    amountController.text = '0';
     if (widget.post != null) {
       postType = widget.post!.type;
       contentController.text = widget.post!.content;
@@ -55,6 +59,18 @@ class _CreatePostState extends State<CreatePost> {
       selectedFile = null;
       contentColor = '';
       contentFontColor = '';
+      taggedUsers = [];
+    });
+  }
+
+  void updateSplitDate() async {
+    final date = await showDatePicker(
+        context: context,
+        firstDate: DateTime(2020),
+        lastDate: DateTime(2030),
+        currentDate: DateTime.now());
+    setState(() {
+      splitDate = date;
     });
   }
 
@@ -68,6 +84,7 @@ class _CreatePostState extends State<CreatePost> {
     savePost(
         user: widget.user,
         content: contentController.text,
+        amount: amountController.text,
         triggerPost: triggerPost,
         context: context,
         contentColor: contentColor,
@@ -125,6 +142,7 @@ class _CreatePostState extends State<CreatePost> {
                   taggedUsers: taggedUsers,
                   post: post,
                   sharePost: sharePost,
+                  type: postType,
                 ),
               ),
               if (postType == 'None')
@@ -156,11 +174,27 @@ class _CreatePostState extends State<CreatePost> {
                 ),
               if (postType == 'Video')
                 Expanded(
-                  child: ContentWithVideo(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: ContentWithVideo(
+                      contentController: contentController,
+                      selectFile: selectFile,
+                      selectedFile: selectedFile,
+                      networkVideo: networkMedia,
+                    ),
+                  ),
+                ),
+              if (postType == 'Split')
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ContentWithSplit(
                     contentController: contentController,
-                    selectFile: selectFile,
-                    selectedFile: selectedFile,
-                    networkVideo: networkMedia,
+                    amountController: amountController,
+                    tagUser: tagUser,
+                    taggedUser: taggedUsers,
+                    user: widget.user,
+                    updateDate: updateSplitDate,
+                    splitDate: splitDate,
                   ),
                 )
             ],

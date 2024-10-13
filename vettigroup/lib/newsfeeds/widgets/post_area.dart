@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:vettigroup/model/post.dart';
+import 'package:vettigroup/model/user.dart';
 import 'package:vettigroup/provider/user_provider.dart';
 import 'package:vettigroup/widgets/loader.dart';
 import 'package:vettigroup/newsfeeds/widgets/post_bottom.dart';
@@ -11,9 +12,10 @@ import 'package:vettigroup/widgets/video_player.dart';
 import 'package:video_player/video_player.dart';
 
 class PostArea extends ConsumerStatefulWidget {
-  const PostArea({super.key, required this.post});
+  const PostArea({super.key, required this.post, required this.user});
 
   final Post post;
+  final AppUser user;
 
   @override
   ConsumerState<PostArea> createState() => _PostAreaState();
@@ -62,9 +64,12 @@ class _PostAreaState extends ConsumerState<PostArea> {
     return usersnapshot.when(
       data: (user) {
         return Container(
-          margin: const EdgeInsets.all(5),
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          color: Colors.white,
+          margin: const EdgeInsets.only(top: 5, left: 3, right: 3),
+          padding: const EdgeInsets.only(top: 10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: Colors.white,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -102,6 +107,7 @@ class _PostAreaState extends ConsumerState<PostArea> {
                       openContent: openContent),
               PostBottom(
                 post: widget.post,
+                user: widget.user,
               )
             ],
           ),

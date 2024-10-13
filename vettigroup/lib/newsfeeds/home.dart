@@ -63,7 +63,10 @@ class HomeScreen extends ConsumerWidget {
                   return SliverList(
                     delegate: SliverChildBuilderDelegate((ctx, index) {
                       final post = posts[index];
-                      return PostArea(post: post);
+                      return PostArea(
+                        post: post,
+                        user: user,
+                      );
                     }, childCount: posts.length),
                   );
                 },

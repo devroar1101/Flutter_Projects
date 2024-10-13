@@ -30,7 +30,17 @@ class PostAttachment extends StatelessWidget {
               changePostType('None');
             },
             child: const Icon(
-              Icons.restart_alt_rounded,
+              Icons.refresh,
+              color: Colors.white,
+            ),
+          ),
+          SpeedDialChild(
+            backgroundColor: Palette.vettiGroupColor,
+            onTap: () {
+              changePostType('Split');
+            },
+            child: const Icon(
+              Icons.attach_money,
               color: Colors.white,
             ),
           ),

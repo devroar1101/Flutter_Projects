@@ -3,12 +3,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:vettigroup/model/post.dart';
+import 'package:vettigroup/model/split.dart';
 import 'package:vettigroup/model/user.dart';
 import 'package:path/path.dart' as p;
 import 'package:vettigroup/people/tag_people.dart';
 import 'package:vettigroup/provider/post_provider.dart';
 import 'package:vettigroup/newsfeeds/widgets/photo_picker.dart';
+import 'package:vettigroup/provider/split_provider.dart';
 import 'package:vettigroup/widgets/video_picker.dart';
 import 'package:video_player/video_player.dart';
 
@@ -54,6 +57,7 @@ VideoPlayerController? createController(File selectedFile) {
 void savePost({
   required AppUser user,
   required String content,
+  required String amount,
   File? file,
   List<String>? taggedUsers,
   type,
@@ -63,21 +67,30 @@ void savePost({
   required Function() triggerPost,
   networkMedia,
   Post? currentpost,
+  DateTime? date,
 }) async {
-  if (type == 'None' && type == 'Color' && content.trim().isEmpty) {
+  if (type == 'None' || type == 'Color' && content.trim().isEmpty) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Please Type Something'),
+        content: Text('Please type something to post'),
       ),
     );
     return;
-  } else if ((type != 'None' &&
-      type != 'Color' &&
-      file == null &&
-      networkMedia == null)) {
+  } else if ((type == 'Video' ||
+      type == 'Image' && file == null && networkMedia == null)) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Please upload file'),
+      ),
+    );
+    return;
+  } else if (type == 'Split' && content.trim().isEmpty ||
+      amount.trim().isEmpty ||
+      taggedUsers!.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content:
+            Text('Please enter bill details , amount and tag peoples to split'),
       ),
     );
     return;
@@ -86,6 +99,7 @@ void savePost({
 
     final container = ProviderContainer();
     final repo = container.read(postProvider);
+    final splitRepo = container.read(splitProvider);
     String meadiaUrl = '';
     Post post;
 
@@ -96,7 +110,7 @@ void savePost({
       currentpost.content = content;
       currentpost.contentcolor = contentColor;
       currentpost.contentfontcolor = contentFontColor;
-      currentpost.taggedUsers = taggedUsers!;
+      currentpost.taggedUsers = taggedUsers;
 
       post = currentpost;
     } else {
@@ -114,7 +128,7 @@ void savePost({
     if (file == null && networkMedia != null && networkMedia != '') {
       meadiaUrl = networkMedia;
       post.mediaUrl = meadiaUrl;
-    } else if (type != 'None' && type != 'Color') {
+    } else if (type == 'Video' || type == 'Image') {
       final fileExtension = p.extension(file!.path);
       final storeMedia = FirebaseStorage.instance
           .ref('PostGalley')
@@ -130,6 +144,15 @@ void savePost({
       repo.updatePost(post);
     } else {
       repo.addPost(post);
+    }
+
+    if (type == 'Split') {
+      final split = SplitWise(
+          postId: post.id,
+          amount: double.tryParse(amount) ?? 0,
+          paidUser: [],
+          splitDate: date ?? DateTime.now());
+      splitRepo.addSplitWise(split);
     }
 
     Navigator.pop(context);

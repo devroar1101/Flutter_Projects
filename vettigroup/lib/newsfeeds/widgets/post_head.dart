@@ -72,18 +72,19 @@ class PostHead extends StatelessWidget {
                           color: Colors.grey[800],
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          showTaggedUser(context);
-                        },
-                        child: Text(
-                          '- with $taggedUserCount other ',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Palette.vettiGroupColor,
+                      if (post.type != 'Split')
+                        GestureDetector(
+                          onTap: () {
+                            showTaggedUser(context);
+                          },
+                          child: Text(
+                            '- with $taggedUserCount other ',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Palette.vettiGroupColor,
+                            ),
                           ),
-                        ),
-                      )
+                        )
                     ],
                   ),
                 Text(formattedDate,
