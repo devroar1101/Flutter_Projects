@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:test2/data/questions.dart';
 import 'package:test2/data/result_page.dart';
-import 'package:test2/home_screen.dart';
-import 'package:test2/questions_screen.dart';
+import 'package:test2/start_page.dart';
+import 'package:test2/question_page.dart';
 
 class CommonWidget extends StatefulWidget {
   const CommonWidget({super.key});
@@ -13,13 +13,13 @@ class CommonWidget extends StatefulWidget {
 }
 
 class _CommonWidgetState extends State<CommonWidget> {
-  var activeScreen = 'start-screen';
+  var activePage = 'start-page';
 
   List<String> answers = [];
 
   /*@override
   void initState() {
-    activeScreen = HomeScreenWidgets(screenChange);
+    activePage = HomepageWidgets(pageChange);
     super.initState();
   }*/
   void gatherAnswer(String answer) {
@@ -27,31 +27,31 @@ class _CommonWidgetState extends State<CommonWidget> {
 
     if (answers.length == questions.length) {
       setState(() {
-        activeScreen = 'result-screen';
+        activePage = 'result-page';
       });
     }
   }
 
-  void screenChange() {
+  void pageChange() {
     setState(() {
-      //activeScreen = const QuestionsScreen();
+      //activePage = const Questionspage();
       answers = [];
-      activeScreen = 'question-screen';
+      activePage = 'question-page';
     });
   }
 
   @override
   Widget build(context) {
-    Widget? navigateScreen;
+    Widget? navigatepage;
 
-    if (activeScreen == 'start-screen') {
-      navigateScreen = HomeScreenWidgets(screenChange);
-    } else if (activeScreen == 'question-screen') {
-      navigateScreen = QuestionsScreen(selectedAnswer: gatherAnswer);
-    } else if (activeScreen == 'result-screen') {
-      navigateScreen = ResultPage(
+    if (activePage == 'start-page') {
+      navigatepage = HomepageWidgets(pageChange);
+    } else if (activePage == 'question-page') {
+      navigatepage = Questionspage(selectedAnswer: gatherAnswer);
+    } else if (activePage == 'result-page') {
+      navigatepage = ResultPage(
         answers: answers,
-        changescreen: screenChange,
+        changepage: pageChange,
       );
     }
 
@@ -64,7 +64,7 @@ class _CommonWidgetState extends State<CommonWidget> {
             Color.fromARGB(255, 11, 1, 51)
           ]),
         ),
-        child: navigateScreen,
+        child: navigatepage,
       )),
     );
   }

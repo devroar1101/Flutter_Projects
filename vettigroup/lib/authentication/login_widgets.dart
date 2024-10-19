@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vettigroup/config/palette.dart';
 
 import 'package:vettigroup/model/user.dart';
 
@@ -98,7 +99,7 @@ class LoginWidgetsState extends State<LoginWidget> {
           ? 5
           : !islogin
               ? 90
-              : 50,
+              : 150,
       left: 0,
       right: 0,
       child: Padding(
@@ -113,7 +114,7 @@ class LoginWidgetsState extends State<LoginWidget> {
                   baseColor: const Color.fromARGB(255, 4, 12, 0),
                   highlightColor: const Color.fromARGB(255, 211, 222, 166),
                   child: Text(
-                    'Vetti Group',
+                    'Vgram',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.lobster(
                       fontSize: 36,
@@ -135,7 +136,7 @@ class LoginWidgetsState extends State<LoginWidget> {
                       ),
                       hintText: 'Username',
                       hintStyle: GoogleFonts.poppins(
-                        color: Colors.teal.shade400,
+                        color: Palette.vettiGroupColor,
                         fontSize: 16,
                       ),
                     ),
@@ -155,7 +156,7 @@ class LoginWidgetsState extends State<LoginWidget> {
                     ),
                     hintText: 'Email',
                     hintStyle: GoogleFonts.poppins(
-                      color: Colors.teal.shade400,
+                      color: Palette.vettiGroupColor,
                       fontSize: 16,
                     ),
                   ),
@@ -176,7 +177,7 @@ class LoginWidgetsState extends State<LoginWidget> {
                       ),
                       hintText: 'Phone Number',
                       hintStyle: GoogleFonts.poppins(
-                        color: Colors.teal.shade400,
+                        color: Palette.vettiGroupColor,
                         fontSize: 16,
                       ),
                     ),
@@ -196,7 +197,7 @@ class LoginWidgetsState extends State<LoginWidget> {
                     ),
                     hintText: 'Password',
                     hintStyle: GoogleFonts.poppins(
-                      color: Colors.teal.shade400,
+                      color: Palette.vettiGroupColor,
                       fontSize: 16,
                     ),
                   ),

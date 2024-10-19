@@ -1,18 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:vettigroup/config/palette.dart';
 import 'package:vettigroup/model/post.dart';
+import 'package:vettigroup/model/split.dart';
 import 'package:vettigroup/model/user.dart';
 import 'package:vettigroup/people/tag_people_area.dart';
 import 'package:vettigroup/post/create_post.dart';
+import 'package:vettigroup/provider/split_provider.dart';
 import 'package:vettigroup/widgets/widgets.dart';
 
-class PostHead extends StatelessWidget {
-  const PostHead({super.key, required this.post, required this.user});
+// ignore: must_be_immutable
+class PostHead extends ConsumerWidget {
+  PostHead({super.key, required this.post, required this.user, this.split});
 
   final Post post;
   final AppUser user;
+  SplitWise? split;
 
   void showTaggedUser(
     context,
@@ -34,7 +39,8 @@ class PostHead extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    split = ref.watch(splitNotifier);
     DateTime postDate = post.createdAt.toDate();
 
     String formattedDate = DateFormat('dd MMM yyyy, hh:mm a').format(postDate);
@@ -111,6 +117,7 @@ class PostHead extends StatelessWidget {
                                 builder: (ctx) => CreatePost(
                                   user: user,
                                   post: post,
+                                  split: split,
                                 ),
                               ),
                             );

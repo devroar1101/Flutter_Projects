@@ -6,6 +6,7 @@ import 'package:vettigroup/config/palette.dart';
 import 'package:vettigroup/model/post.dart';
 import 'package:vettigroup/model/reaction.dart';
 import 'package:vettigroup/model/user.dart';
+import 'package:vettigroup/provider/post_provider.dart';
 import 'package:vettigroup/provider/reaction_provider.dart';
 import 'package:vettigroup/widgets/loader.dart';
 
@@ -43,47 +44,69 @@ class _PostBottomState extends ConsumerState<PostBottom> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          GestureDetector(
-            onTap: () {
-              showAnimatedIcons(
-                context: context,
-                postId: widget.post.id,
-                userId: widget.user.userId,
-                reactions: reactions,
-                updateList: updateList,
-                ref: ref,
-              );
-            },
-            child: Container(
-              height: 30,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: Colors.grey[200],
-              ),
-              child: Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Icons.sentiment_satisfied,
-                      size: 25,
-                      color: Palette.vettiGroupColor,
-                    ),
-                    const SizedBox(
-                      width: 3,
-                    ),
-                    ReactedArea(
-                      post: widget.post,
-                      reactions: reactions,
-                      ref: ref,
-                      userId: widget.user.userId,
-                      updateClick: updateList,
-                    ),
-                  ],
+          if (widget.post.type != 'Split')
+            GestureDetector(
+              onTap: () {
+                showAnimatedIcons(
+                  context: context,
+                  postId: widget.post.id,
+                  userId: widget.user.userId,
+                  reactions: reactions,
+                  updateList: updateList,
+                  ref: ref,
+                );
+              },
+              child: Container(
+                height: 30,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.grey[200],
+                ),
+                child: Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.sentiment_satisfied,
+                        size: 25,
+                        color: Palette.vettiGroupColor,
+                      ),
+                      const SizedBox(
+                        width: 3,
+                      ),
+                      ReactedArea(
+                        post: widget.post,
+                        reactions: reactions,
+                        ref: ref,
+                        userId: widget.user.userId,
+                        updateClick: updateList,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
+          if (widget.post.type == 'Split')
+            GestureDetector(
+              onTap: () {
+                widget.post.createdAt = Timestamp.now();
+
+                ref.read(postProvider).updatePost(widget.post);
+              },
+              child: Container(
+                height: 30,
+                width: 30,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.grey[200],
+                ),
+                child: Icon(
+                  Icons.repeat_sharp,
+                  size: 20.0,
+                  color: Palette.vettiGroupColor,
+                ),
+              ),
+            ),
           const SizedBox(
             width: 4,
           ),

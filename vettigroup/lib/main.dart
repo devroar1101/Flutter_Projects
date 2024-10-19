@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vettigroup/authentication/login.dart';
 import 'package:vettigroup/config/palette.dart';
@@ -12,9 +13,12 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(ProviderScope(
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
+          // Add this line in your main function.
+
           theme: ThemeData(
               primarySwatch: Colors.cyan,
               visualDensity: VisualDensity.adaptivePlatformDensity,

@@ -7,6 +7,8 @@ class Palette {
 
   static Color vettiGroupColor = Colors.teal.shade400;
 
+  static Color unPaid = const Color.fromARGB(210, 246, 73, 106);
+
   static const LinearGradient createRoomGradient = LinearGradient(
     colors: [Color(0xFF496AE1), Color(0xFFCE48B1)],
   );

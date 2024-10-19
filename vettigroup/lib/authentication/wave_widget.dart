@@ -79,12 +79,12 @@ class _WaveWidgetState extends State<WaveWidget> with TickerProviderStateMixin {
         // Centered Image using Padding
         Positioned(
           right: 1,
-          left: 30,
-          top: 5,
+          left: 0,
+          top: 10,
           child: Image.asset(
             'assets/gifs/login.gif', // Update the asset path to the GIF
             fit: BoxFit.cover,
-            height: MediaQuery.of(context).size.width > 600 ? 180 : 180,
+            height: MediaQuery.of(context).size.width > 600 ? 250 : 250,
 
             width: 650,
           ),

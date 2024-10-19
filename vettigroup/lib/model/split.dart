@@ -5,10 +5,10 @@ final uuid = Uuid();
 
 class SplitWise {
   final String postId;
-  final String id;
+  String id;
   double amount;
   List<String> paidUser;
-  DateTime splitDate;
+  Timestamp splitDate;
 
   SplitWise(
       {required this.postId,
@@ -32,7 +32,8 @@ class SplitWise {
     return SplitWise(
         postId: map['postId'],
         amount: map['amount'],
-        paidUser: map['paidUser'],
+        paidUser:
+            (map['paidUser'] as List<dynamic>).map((m) => m as String).toList(),
         id: map['id'],
         splitDate: map['splitDate']);
   }
@@ -54,12 +55,16 @@ class FireStoreSplitWiseRepository {
     await _firestore.collection('splits').doc(split.id).delete();
   }
 
-  Future<SplitWise> getSplitWiseByPostId(String postId) async {
-    final snapshot = await _firestore
+  Stream<SplitWise?> getSplitWiseByPostId(String postId) {
+    return _firestore
         .collection('splits')
         .where('postId', isEqualTo: postId)
-        .get();
-
-    return snapshot.docs.map((m) => SplitWise.fromMap(m.data())).toList().first;
+        .snapshots()
+        .map((snapshot) {
+      if (snapshot.docs.isEmpty) {
+        return null;
+      } // Return null if no documents found
+      return SplitWise.fromMap(snapshot.docs.first.data());
+    });
   }
 }

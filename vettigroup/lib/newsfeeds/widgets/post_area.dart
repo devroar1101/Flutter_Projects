@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:vettigroup/model/post.dart';
+import 'package:vettigroup/model/split.dart';
 import 'package:vettigroup/model/user.dart';
+import 'package:vettigroup/newsfeeds/widgets/split_post.dart';
 import 'package:vettigroup/provider/user_provider.dart';
 import 'package:vettigroup/widgets/loader.dart';
 import 'package:vettigroup/newsfeeds/widgets/post_bottom.dart';
@@ -28,12 +30,22 @@ class _PostAreaState extends ConsumerState<PostArea> {
 
   bool onTapContent = false;
 
+  SplitWise? split;
+
   void openContent() {
     setState(() {
       if (widget.post.content.length > 100) {
         onTapContent = !onTapContent;
       }
     });
+  }
+
+  void updateSplit(SplitWise split) {
+    if (mounted) {
+      setState(() {
+        this.split = split;
+      });
+    }
   }
 
   @override
@@ -73,7 +85,11 @@ class _PostAreaState extends ConsumerState<PostArea> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              PostHead(post: widget.post, user: user!),
+              PostHead(
+                post: widget.post,
+                user: user!,
+                split: split,
+              ),
               const SizedBox(height: 4),
               if (widget.post.type == 'Image' || widget.post.type == 'Video')
                 Text(widget.post.content),
@@ -104,7 +120,9 @@ class _PostAreaState extends ConsumerState<PostArea> {
                   : PostContent(
                       post: widget.post,
                       onTapContent: onTapContent,
-                      openContent: openContent),
+                      openContent: openContent,
+                      updateSplit: updateSplit,
+                    ),
               PostBottom(
                 post: widget.post,
                 user: widget.user,
@@ -124,78 +142,83 @@ class PostContent extends StatelessWidget {
   final Post post;
   final bool onTapContent;
   void Function() openContent;
+  void Function(SplitWise) updateSplit;
 
   PostContent(
       {super.key,
       required this.post,
       required this.onTapContent,
-      required this.openContent});
+      required this.openContent,
+      required this.updateSplit});
 
   @override
   Widget build(BuildContext context) {
-    return post.type != 'Color'
-        ? InkWell(
-            onTap: openContent,
-            child: Expanded(
-              child: AnimatedContainer(
-                duration: const Duration(seconds: 10),
-                height: onTapContent
-                    ? 350
-                    : post.content.length < 100
-                        ? post.content.length + 50
-                        : 100,
-                width: 400,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: SingleChildScrollView(
-                    child: Text(
-                      post.content.length > 100 && !onTapContent
-                          ? '${post.content.substring(0, 150)}...more'
-                          : post.content,
+    return post.type == 'Split'
+        ? SplitPost(post: post, updateSplit: updateSplit)
+        : post.type != 'Color'
+            ? InkWell(
+                onTap: openContent,
+                child: Expanded(
+                  child: AnimatedContainer(
+                    duration: const Duration(seconds: 10),
+                    height: onTapContent
+                        ? 350
+                        : post.content.length < 100
+                            ? post.content.length + 50
+                            : 100,
+                    width: 400,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 10),
+                      child: SingleChildScrollView(
+                        child: Text(
+                          post.content.length > 100 && !onTapContent
+                              ? '${post.content.substring(0, 150)}...more'
+                              : post.content,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
-          )
-        : Container(
-            height: 300,
-            width: 550,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: Color(int.parse(post.contentcolor.replaceFirst('0x', ''),
-                    radix: 16))),
-            child: Padding(
-              padding: const EdgeInsets.only(
-                left: 10,
-                bottom: 10,
-              ),
-              child: Center(
-                child: SingleChildScrollView(
+              )
+            : Container(
+                height: 300,
+                width: 550,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Color(int.parse(
+                        post.contentcolor.replaceFirst('0x', ''),
+                        radix: 16))),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 10,
+                    bottom: 10,
+                  ),
                   child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        post.content,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 25,
-                          color: Color(
-                            int.parse(
-                              post.contentfontcolor.replaceFirst('0x', ''),
-                              radix: 16,
+                    child: SingleChildScrollView(
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            post.content,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: Color(
+                                int.parse(
+                                  post.contentfontcolor.replaceFirst('0x', ''),
+                                  radix: 16,
+                                ),
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ),
-            ));
+                ));
   }
 }

@@ -102,7 +102,7 @@ class ContentWithSplit extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               child: SplitList(
                 connections: user.connections,
-                taggedUsersIds: taggedUser,
+                paidUsers: taggedUser,
                 tagUser: tag,
               ),
             ),

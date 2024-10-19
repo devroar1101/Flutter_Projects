@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vettigroup/model/post.dart';
+import 'package:vettigroup/model/split.dart';
 import 'package:vettigroup/post/content_with_color.dart';
 import 'package:vettigroup/post/content_with_image.dart';
 import 'package:vettigroup/post/content_with_split.dart';
@@ -14,9 +16,10 @@ import 'package:vettigroup/post/post_attachment.dart';
 
 // ignore: must_be_immutable
 class CreatePost extends StatefulWidget {
-  CreatePost({super.key, required this.user, this.post});
+  CreatePost({super.key, required this.user, this.post, this.split});
 
   Post? post;
+  SplitWise? split;
 
   final AppUser user;
 
@@ -50,6 +53,10 @@ class _CreatePostState extends State<CreatePost> {
       contentFontColor = widget.post!.contentfontcolor;
       networkMedia = widget.post!.mediaUrl;
       postId = widget.post!.id;
+    }
+    if (widget.split != null) {
+      splitDate = widget.split!.splitDate.toDate();
+      amountController.text = widget.split!.amount.toString();
     }
   }
 
@@ -93,7 +100,9 @@ class _CreatePostState extends State<CreatePost> {
         taggedUsers: taggedUsers,
         type: postType,
         networkMedia: networkMedia,
-        currentpost: widget.post);
+        currentpost: widget.post,
+        date: Timestamp.fromDate(splitDate ?? DateTime.now()),
+        split: widget.split);
   }
 
   void selectFile(File file) {
