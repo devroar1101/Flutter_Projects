@@ -99,7 +99,8 @@ class _PostAreaState extends ConsumerState<PostArea> {
                       ? Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           child: CachedNetworkImage(
-                              imageUrl: widget.post.mediaUrl),
+                            imageUrl: widget.post.mediaUrl,
+                          ),
                         )
                       : widget.post.type == 'Video' &&
                               videoController != null &&
@@ -132,7 +133,7 @@ class _PostAreaState extends ConsumerState<PostArea> {
         );
       },
       error: (e, t) => Text('Error: $e '),
-      loading: () => Loader(type: 2),
+      loading: () => const Loader(type: 2),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
 
-final uuid = Uuid();
+final uuid = const Uuid();
 
 class SplitWise {
   final String postId;

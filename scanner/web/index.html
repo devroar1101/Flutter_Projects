@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Loading...</title>
+   
+    <!-- Add Dynamsoft WebTwain SDK -->
+    <script src="/assets/dynamsoft/dynamsoft.webtwain.initiate.js" type="text/javascript"></script>
+    <script src="/assets/dynamsoft/dynamsoft.webtwain.config.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        // Wait for the full page load
+        window.addEventListener('load', function () {
+            document.body.style.display = 'block'; // Show content after page load
+            
+            // Check if Dynamsoft WebTwain SDK is loaded
+            if (typeof Dynamsoft === 'undefined' || typeof Dynamsoft.WebTwainEnv === 'undefined') {
+                console.error("Dynamsoft SDK is not loaded.");
+            } else {
+                console.log("Dynamsoft SDK successfully loaded.");
+            }
+            
+            // Additional page setup logic (e.g., initialize your scanning tool here)
+        }, false);
+    </script>
+</head>
+<body style="display:none;">
+    <script src="/assets/js/eoffice.js" type="text/javascript"></script> <!-- Your custom JS -->
+</body>
+</html>

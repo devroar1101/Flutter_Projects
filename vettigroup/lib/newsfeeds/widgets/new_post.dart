@@ -48,8 +48,8 @@ class NewPost extends StatelessWidget {
                   );
                 },
                 style: ButtonStyle(
-                  padding:
-                      WidgetStateProperty.all<EdgeInsets>(EdgeInsets.all(10)),
+                  padding: WidgetStateProperty.all<EdgeInsets>(
+                      const EdgeInsets.all(10)),
                   shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),

@@ -1,5 +1,6 @@
 import 'package:animated_emoji/animated_emoji.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vettigroup/config/palette.dart';
@@ -9,6 +10,8 @@ import 'package:vettigroup/model/user.dart';
 import 'package:vettigroup/provider/post_provider.dart';
 import 'package:vettigroup/provider/reaction_provider.dart';
 import 'package:vettigroup/widgets/loader.dart';
+
+bool isNotWeb = kIsWeb ? false : true;
 
 class PostBottom extends ConsumerStatefulWidget {
   const PostBottom({super.key, required this.post, required this.user});
@@ -335,6 +338,7 @@ class ReactedArea extends StatelessWidget {
                     updateClick: updateClick);
               },
               child: AnimatedEmoji(
+                animate: isNotWeb ? true : false,
                 AnimatedEmojis.values[reactIndex],
                 size: 20,
               ),

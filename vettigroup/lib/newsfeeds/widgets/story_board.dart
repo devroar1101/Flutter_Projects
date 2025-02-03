@@ -38,13 +38,14 @@ class StoryBoard extends StatelessWidget {
                   //decoration: const BoxDecoration(shape: BoxShape.circle),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
-                    child: CachedNetworkImage(
-                      // ignore: unnecessary_null_comparison
-                      imageUrl: currentUser.profilePicture != ''
-                          ? currentUser.profilePicture
-                          : 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45',
-                      fit: BoxFit.cover,
-                    ),
+                    child: currentUser.profilePicture != ''
+                        ? Image.network(
+                            // ignore: unnecessary_null_comparison
+                            currentUser.profilePicture,
+
+                            fit: BoxFit.cover,
+                          )
+                        : Image.asset('assets/gifs/profile.gif'),
                   ),
                 ),
                 Positioned(

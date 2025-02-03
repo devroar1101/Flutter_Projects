@@ -113,7 +113,7 @@ class _SplitPostState extends ConsumerState<SplitPost> {
         },
         error: (e, t) => Text('error $e'),
         loading: () {
-          return Loader(type: 2);
+          return const Loader(type: 2);
         });
   }
 }

@@ -25,7 +25,7 @@ class PostHead extends ConsumerWidget {
     showBottomSheet(
         showDragHandle: true,
         context: context,
-        builder: (ctx) => Container(
+        builder: (ctx) => SizedBox(
               height: 400,
               child: TagPeopleArea(
                   connections: post.taggedUsers,

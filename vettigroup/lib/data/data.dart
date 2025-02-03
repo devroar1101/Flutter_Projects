@@ -3,7 +3,7 @@ import 'package:uuid/uuid.dart';
 import 'package:vettigroup/model/story.dart';
 import 'package:vettigroup/model/user.dart';
 
-final uuid = Uuid();
+final uuid = const Uuid();
 
 // AppUser list with unique profile pictures
 const List<AppUser> appUserList = [

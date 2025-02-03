@@ -99,7 +99,7 @@ class LoginWidgetsState extends State<LoginWidget> {
           ? 5
           : !islogin
               ? 90
-              : 150,
+              : 60,
       left: 0,
       right: 0,
       child: Padding(

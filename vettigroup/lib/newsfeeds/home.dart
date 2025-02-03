@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vettigroup/config/palette.dart';
+import 'package:vettigroup/map/map.dart';
 
 import 'package:vettigroup/provider/post_provider.dart';
 import 'package:vettigroup/provider/user_provider.dart';
@@ -26,14 +27,18 @@ class HomeScreen extends ConsumerWidget {
           slivers: [
             SliverAppBar(
               backgroundColor: Colors.white,
-              title: Text(
-                'Vgram',
-                style: TextStyle(
-                  color: Palette.vettiGroupColor,
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: -1.2,
-                ),
+              title: TextButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (ctx) => const VgramMap()));
+                },
+                child: Text('Vgram',
+                    style: TextStyle(
+                      color: Palette.vettiGroupColor,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: -1.2,
+                    )),
               ),
               centerTitle: false,
               floating: true,

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "768549133048",
+    "project_id": "embed-sri-1111",
+    "storage_bucket": "embed-sri-1111.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768549133048:android:61089529d3ff2f7700f90d",
+        "android_client_info": {
+          "package_name": "com.gps.tracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJdLAeattmnzO3Mid5hYXVPmUykwR6ZDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -96,7 +96,7 @@ class ContentWithSplit extends StatelessWidget {
               ],
             ),
           ),
-          Container(
+          SizedBox(
             height: 400,
             child: Padding(
               padding: const EdgeInsets.all(10),

@@ -70,7 +70,7 @@ void savePost({
   required Timestamp date,
 }) async {
   if ((type == 'None' || type == 'Color') && content.trim().isEmpty) {
-    print('1111$type $content,${content.trim().isEmpty}');
+   
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Please type something to post'),
@@ -135,7 +135,7 @@ void savePost({
         post.mediaUrl = mediaUrl;
       }
     } else if (type == 'Video' || type == 'Image') {
-      if (file != null && post != null) {
+      if (post != null) {
         final fileExtension = p.extension(file.path);
         final storeMedia = FirebaseStorage.instance
             .ref('PostGalley')

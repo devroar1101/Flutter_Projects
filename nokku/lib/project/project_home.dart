@@ -108,7 +108,7 @@ class _ProjectHomeState extends ConsumerState<ProjectHome> {
         data: (projects) => GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: width >= 850
-                ? 3
+                ? 4
                 : width <= 600
                     ? 1
                     : 2,
@@ -120,9 +120,12 @@ class _ProjectHomeState extends ConsumerState<ProjectHome> {
           itemCount: projects.length,
           itemBuilder: (context, index) {
             final project = projects[index];
-            final red = _random.nextInt(256);
-            final green = _random.nextInt(256);
-            final blue = _random.nextInt(256);
+            // final red = _random.nextInt(256);
+            // final green = _random.nextInt(256);
+            // final blue = _random.nextInt(256);
+            final red = 164;
+            final green = 78;
+            final blue = 66;
 
             return InkWell(
               splashColor: Color.fromARGB(186, red, green, blue),

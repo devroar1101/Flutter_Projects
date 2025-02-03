@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:vettigroup/config/palette.dart';
 
@@ -25,7 +24,7 @@ class ProfileAvatar extends StatelessWidget {
             radius: notSeen ? 17 : 20,
             backgroundColor: Colors.grey[300],
             backgroundImage: imageUrl != ''
-                ? CachedNetworkImageProvider(
+                ? NetworkImage(
                     imageUrl,
                   )
                 : const AssetImage('assets/gifs/profile.gif'),

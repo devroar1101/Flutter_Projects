@@ -14,7 +14,7 @@ class UserIndex {
 }
 
 class FireStoreUserIndexRepositary {
-  FirebaseFirestore _fireStore;
+  final FirebaseFirestore _fireStore;
 
   FireStoreUserIndexRepositary(this._fireStore);
   void addConnection(userId, UserIndex UserIndex) async {

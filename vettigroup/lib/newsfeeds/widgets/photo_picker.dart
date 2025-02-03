@@ -16,7 +16,7 @@ class PhotoPicker extends StatelessWidget {
 
     void pickImage(String type) async {
       final imagePicker = ImagePicker();
-      final selectedImage;
+      final XFile? selectedImage;
 
       if (type == 'Camera') {
         selectedImage = await imagePicker.pickImage(
